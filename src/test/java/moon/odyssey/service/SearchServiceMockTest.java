@@ -126,7 +126,6 @@ public class SearchServiceMockTest {
                                   .onErrorContinue((throwable, o) -> log.error("Error occurred at : {} with {} ", o, throwable.getLocalizedMessage()));
 
         postFlux.subscribe(post -> log.info(post.toString()));
-
     }
 
     @Test
@@ -143,10 +142,12 @@ public class SearchServiceMockTest {
 
         Flux<Post> postFlux = Flux.just(1, 2, 3)
                                   .flatMap(i -> searchService.getPost(i))
-                                  .onErrorContinue(RuntimeException.class, (throwable, o) -> log.error("Error occurred at : {} with {} ", o, throwable.getLocalizedMessage()));
+                                  .onErrorContinue(
+                                      RuntimeException.class
+                                      , (throwable, o) -> log.error("Error occurred at : {} with {} ", o, throwable.getLocalizedMessage())
+                                  );
 
         postFlux.subscribe(post -> log.info(post.toString()));
-
     }
 
     @Test
@@ -163,10 +164,12 @@ public class SearchServiceMockTest {
 
         Flux<Post> postFlux = Flux.just(1, 2, 3)
                                   .flatMap(i -> searchService.getPost(i))
-                                  .onErrorContinue(throwable -> throwable.getLocalizedMessage().contains("Mock"), (throwable, o) -> log.error("Error occurred at : {} with {} ", o, throwable.getLocalizedMessage()));
+                                  .onErrorContinue(
+                                      throwable -> throwable.getLocalizedMessage().contains("Mock")
+                                      , (throwable, o) -> log.error("Error occurred at : {} with {} ", o, throwable.getLocalizedMessage())
+                                  );
 
         postFlux.subscribe(post -> log.info(post.toString()));
-
     }
 
     @Test
@@ -188,7 +191,6 @@ public class SearchServiceMockTest {
             ;
 
         postFlux.subscribe(post -> log.info(post.toString()));
-
     }
 
     @Test
@@ -211,7 +213,6 @@ public class SearchServiceMockTest {
             ;
 
         postFlux.subscribe(post -> log.info(post.toString()));
-
     }
 
     @Test
@@ -238,11 +239,10 @@ public class SearchServiceMockTest {
         postFlux
             .subscribe(post -> log.info(post.toString())
                 , throwable -> log.error(throwable.getLocalizedMessage())
-                , () -> {latch.countDown();}
+                , latch::countDown
             );
 
         latch.await();
-
     }
 
     @Test
@@ -269,11 +269,10 @@ public class SearchServiceMockTest {
         postFlux
             .subscribe(post -> log.info(post.toString())
                 , throwable -> log.error(throwable.getLocalizedMessage())
-                , () -> {latch.countDown();}
+                , latch::countDown
             );
 
         latch.await();
-
     }
 
     @Test
@@ -301,11 +300,10 @@ public class SearchServiceMockTest {
         postFlux
             .subscribe(post -> log.info(post.toString())
                 , throwable -> log.error(throwable.getLocalizedMessage())
-                , () -> {latch.countDown();}
+                , latch::countDown
             );
 
         latch.await();
-
     }
 
 
