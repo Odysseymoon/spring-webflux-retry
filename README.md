@@ -1,5 +1,5 @@
 # Spring WebFlux Error handling and Retry strategy
---
+---
 
 
 1. onErrorReturn
@@ -366,7 +366,7 @@ public void _11_test_OnErrorRetryWhenFixedDelay() throws InterruptedException {
 ```text
 17:44:53.511  INFO 47694 --- [           main] m.odyssey.service.SearchServiceMockTest  : Post(id=1, title=title1, body=body1, userId=1)
 17:44:55.533  INFO 47694 --- [     parallel-1] m.odyssey.service.SearchServiceMockTest  : Post(id=1, title=title1, body=body1, userId=1)  <-- First retry after 2 seconds with new subscriber
-17:44:57.536  INFO 47694 --- [     parallel-2] m.odyssey.service.SearchServiceMockTest  : Post(id=1, title=title1, body=body1, userId=1)  <-- Second retry after 2 seconds
+17:44:57.536  INFO 47694 --- [     parallel-2] m.odyssey.service.SearchServiceMockTest  : Post(id=1, title=title1, body=body1, userId=1)  <-- Second retry after 2 seconds with new subscriber
 17:44:57.536  INFO 47694 --- [     parallel-2] m.odyssey.service.SearchServiceMockTest  : Post(id=2, title=title2, body=body2, userId=3)
 17:44:57.536  INFO 47694 --- [     parallel-2] m.odyssey.service.SearchServiceMockTest  : Post(id=3, title=title3, body=body3, userId=3)
 ```
